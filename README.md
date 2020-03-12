@@ -46,4 +46,18 @@ StreamingEnv.init(getApplicationContext());
 
 ## 开始推流
 prepare之后会在onStateChanged回调SDK状态，在READY时调用mMediaStreamingManager.startStreaming()即可
+```
+    case READY:
+        Log.e(TAG, "READY");
+        // start streaming when READY
+        new Thread(new Runnable() {
+            @Override
+            public void run() {
+                if (mMediaStreamingManager != null) {
+                    mMediaStreamingManager.startStreaming();
+                }
+            }
+        }).start();
+        break;
+```
 
