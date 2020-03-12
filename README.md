@@ -1,5 +1,7 @@
 # easystreaming
 用于快速集成七牛推流SDK
+[开发文档及API](https://developer.qiniu.com/pili/sdk/3719/PLDroidMediaStreaming-function-using)
+[七牛官方Demo](https://github.com/pili-engineering/PLDroidMediaStreaming)
 
 ## Application初始化
 ```
