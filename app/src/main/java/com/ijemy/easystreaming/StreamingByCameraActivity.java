@@ -59,6 +59,16 @@ public class StreamingByCameraActivity extends Activity
             mProfile.setAVProfile(avProfile);
             **/
 
+            /**
+             * 自适应码率
+             * 由于无线网络相对于有线网络，可靠性较低，会经常遇到信号覆盖不佳导致的高丢包、高延时等问题，特别是在用网高峰期，由于带宽有限，网络拥塞的情况时有发生
+             * 以下两种方式都可以，也可以同时设置，同时设置时咦第二种为准
+             */
+            //between with StreamingProfile.VIDEO_QUALITY_LOW1 and setVideoQuality||VideoProfile
+            mProfile.setBitrateAdjustMode(StreamingProfile.BitrateAdjustMode.Auto);
+            //between with 800*1024 and 1400*1024
+            //mProfile.setVideoAdaptiveBitrateRange(800*1024, 1400*1024);
+
             //预览设置 主播看到的视频画面
             CameraStreamingSetting camerasetting = new CameraStreamingSetting();
             camerasetting.setCameraId(Camera.CameraInfo.CAMERA_FACING_BACK)//后置摄像头
