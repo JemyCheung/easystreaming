@@ -43,21 +43,21 @@ public class StreamingByCameraActivity extends Activity
             //编码设置 观众看到的视频画面
             //方式1 采用SDK带的默认参数
             mProfile = new StreamingProfile();
-            mProfile.setVideoQuality(StreamingProfile.VIDEO_QUALITY_HIGH1)//Fps=30, Video Bitrate=1200
-                    .setAudioQuality(StreamingProfile.AUDIO_QUALITY_MEDIUM2)//Audio Bitrate=48, Audio Sample Rate=44100
-                    .setEncodingSizeLevel(StreamingProfile.VIDEO_ENCODING_HEIGHT_480)//16:9的时候是848 x 480
-                    .setEncoderRCMode(StreamingProfile.EncoderRCModes.QUALITY_PRIORITY)//质量优先，实际的码率可能高于设置的码率
-                    .setPublishUrl(mUrl);//设置推流地址
+//            mProfile.setVideoQuality(StreamingProfile.VIDEO_QUALITY_HIGH1)//Fps=30, Video Bitrate=1200
+//                    .setAudioQuality(StreamingProfile.AUDIO_QUALITY_MEDIUM2)//Audio Bitrate=48, Audio Sample Rate=44100
+//                    .setEncodingSizeLevel(StreamingProfile.VIDEO_ENCODING_HEIGHT_480)//16:9的时候是848 x 480
+//                    .setEncoderRCMode(StreamingProfile.EncoderRCModes.QUALITY_PRIORITY)//质量优先，实际的码率可能高于设置的码率
+//                    .setPublishUrl(mUrl);//设置推流地址
 
             //方式2 自定义编码参数
-            /**
+            mProfile.setPreferredVideoEncodingSize(720,1280);
             // audio sample rate is 44100, audio bitrate is 48 * 1024 bps
             StreamingProfile.AudioProfile aProfile= new StreamingProfile.AudioProfile(44100, 48 * 1024);
             // fps is 20, video bitrate is 1000 * 1024 bps, maxKeyFrameInterval is 60, profile is HIGH
-            StreamingProfile.VideoProfile vProfile = new StreamingProfile.VideoProfile(20, 1000 * 1024, 60, StreamingProfile.H264Profile.HIGH);
+            StreamingProfile.VideoProfile vProfile = new StreamingProfile.VideoProfile(20, 1800 * 1024, 60, StreamingProfile.H264Profile.HIGH);
             StreamingProfile.AVProfile avProfile = new StreamingProfile.AVProfile(vProfile, aProfile);
             mProfile.setAVProfile(avProfile);
-            **/
+            mProfile.setPublishUrl(mUrl);//设置推流地址
 
             /**
              * 自适应码率
@@ -67,7 +67,7 @@ public class StreamingByCameraActivity extends Activity
             //between with StreamingProfile.VIDEO_QUALITY_LOW1 and setVideoQuality||VideoProfile
             mProfile.setBitrateAdjustMode(StreamingProfile.BitrateAdjustMode.Auto);
             //between with 800*1024 and 1400*1024
-            //mProfile.setVideoAdaptiveBitrateRange(800*1024, 1400*1024);
+            mProfile.setVideoAdaptiveBitrateRange(1000*1024, 2400*1024);
 
             //预览设置 主播看到的视频画面
             CameraStreamingSetting camerasetting = new CameraStreamingSetting();
